@@ -4,12 +4,19 @@ require 'rspec'
 #######################################################
 ## YOUR CODE
 def is_a_leap_year?(year)
-  (year % 4 == 0)
+  (year % 4 == 0 && year % 100 > 0) || (year % 400 == 0)
 end
 
 def leap_years_between(start_year, end_year)
-
+  leap_years = []
+  (start_year..end_year).each do |year|
+    if is_a_leap_year?(year) 
+      leap_years << year
+    end
+  end
+  return leap_years
 end
+
 
 
 #######################################################
@@ -32,7 +39,7 @@ RSpec.describe "leap year exercise" do
     end
 
     it "says 1600 is a leap year" do
-      expec(is_a_leap_year?(1600)).to eq true
+      expect(is_a_leap_year?(1600)).to eq true
     end
 
     it "says 1800 is not a leap year" do
